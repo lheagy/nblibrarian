@@ -1,0 +1,13 @@
+# information about the source library
+source:
+  github:
+    user: geoscixyz
+    repo: geosci-labs
+    branch: master
+
+# setup options for the library
+setup:
+  environment: environment.yml  # include the environment.yml from the source
+  requirements: requirements.txt  # include the requirements.txt file
+
+
