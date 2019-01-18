@@ -3,8 +3,8 @@ Tools for parsing a .jupyter-include file and assessing if a source file
 meets those criteria or not
 """
 
+import fnmatch
 import re
-
 
 def parse_jupyter_include(file=".jupyter-include"):
     """
@@ -27,6 +27,6 @@ def include(source, include_criteria):
     """
     check if a file (`source`) should be included given the `include_criteria`
     """
-    if any([re.search(c, source) for c in include_criteria]):
+    if any([re.search(fnmatch.translate(c)[4:-3], source) for c in include_criteria]):
         return True
     return False

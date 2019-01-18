@@ -9,6 +9,8 @@ env:
   global:
     - MASTER_BRANCH=master
     - PYPI_PY=3.6  # deploy to pypi from python 3.6
+    - TWINE_USERNAME=lheagy
+    - secure: "pf4vT9kh7JbPE1K94F8Mvj++J4a3ckA6EcrC3DiTi2/NVdHyQwGljDm8a31Nm5Nii+ZduAhID7o5ZLJbNYPTMTzuBL4lWbsFfoaMxCN0ckFPAMF305d3ldyqT0WzO1GRIqw0ERYMm+h0gGqNnmTQ1bCtGU8VO9jEQ58o80cydlFOqgHt46Hk3k4H7G3p1XtJFQ4rG0ekryWqPSuZNWfGwDJvD5Na+1bJaAgDwaNyVRNyhbk3toOG7VoD85n1NttQ+eJYAspwEfSIKKSvrjqWd5uwBwupnOhkZFlniXw9jl8vClJG4UTZixIHPpMiqjjMZoUVrzjEoTzwZ/Zx/pAWDSCkAWfPem7snJ0Ob8qkIKozIiIQ2gNcx/QSoIf+aZnZ1cmcmS4KAnx4HxM5kI40JRuKRmL60ybhzhbG0o+0fkunSvqJoHp5Lzmax+QqQtmdjDOZNi5aepo+LgTomhKpRb0xdcVH1sh/eRwca2DLL/dOcodCHeQThnNXa42hjWT382Q0ZDNAKE26Q8m3N13lI9MM1ln3rNdyBLlYEap/wmsYXD2bXWuhjvGvFiFjIKiWF0oGD3U1zx+0UMqTiuAfdh4P0TsRIBsKLqcMIrEOOzppfXHD+3Kx94Cn4kYjTT+uAHokm4Du9X+GC4qYostxt3UhAAHLENT5fVfwMvgVHQY="
 
 install:
   - pip install -r requirements-dev.txt
@@ -23,24 +25,9 @@ after_success:
 
   - bash <(curl -s https://codecov.io/bash)
 
-  # early exit if not on a deplotment branch
-  - if ! [ "$TRAVIS_BRANCH" = "$MASTER_BRANCH" -o "$TRAVIS_TAG" = "true" ]; then
-      echo "Not deploying (because this is not a deployment branch)" ;
-      exit 0 ;
-    fi
-  - if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then
-      echo "Not deploying (because this is a pull request)" ;
-      exit 0 ;
-    fi
-
-  # unpack credentials
-  - openssl aes-256-cbc -K $encrypted_9f42beb9a57a_key -iv $encrypted_9f42beb9a57a_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
-  - tar -xzf credentials.tar.gz
-
-  # deploy to pypi on tags
-  - mv credentials/.pypirc ~/.pypirc ;
-  - make deploy;
-
-
-notifications:
-  slack: simpeg:1KZq5giMtlJJ58TijIPgqf7n
+deploy:
+  - provider: script
+      script: ci/deploy-pypi.sh
+      on:
+          tags: true
+          branch: master

@@ -2,6 +2,7 @@
 # Import functions/classes to make the public API
 
 from .librarian import Librarian
+from .jupyter_include import parse_jupyter_include, include
 
 __version__ = "0.0.1"
 __author__ = "Lindsey Heagy"
