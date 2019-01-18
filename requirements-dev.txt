@@ -1,0 +1,6 @@
+flake8
+black
+twine
+pytest
+coverage
+codecov

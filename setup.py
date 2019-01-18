@@ -28,7 +28,7 @@ with open("README.rst") as f:
 setup(
     name="nblibrarian",
     version="0.0.1",
-    packages=find_packages(),
+    packages=find_packages(exclude=["docs/*"]),
     install_requires=[
         "requests",
     ],
@@ -42,4 +42,9 @@ setup(
     download_url="http://github.com/lheagy/nblibrarian",
     classifiers=CLASSIFIERS,
     platforms=["Windows", "Linux", "Solaris", "Mac OS-X", "Unix"],
+    entry_points={
+        'console_scripts': [
+            'nblibrarian = nblibrarian.command_line:main',
+        ],
+    },
 )

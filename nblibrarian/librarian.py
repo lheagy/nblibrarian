@@ -19,9 +19,11 @@ class Librarian(object):
     Class for configuring and managing the library of notebooks.
     """
 
-    def __init__(self, config_file=None):
+    def __init__(self, config_file=None, verbose=False):
         if config_file is not None:
             self.config_file = config_file  # go through the setter
+
+        self.verbose=verbose
 
     @property
     def config_file(self):
@@ -90,6 +92,7 @@ class Librarian(object):
             source = self.config['source']['github']
             user = source['user']
             repo = source['repo']
+
              # select either the provided branch or find the default branch on github
             if 'branch' in source.keys():
                 branch = source['branch']
@@ -100,6 +103,9 @@ class Librarian(object):
                 else:
                     raise Exception(f"Could not find repo https://github.com/{user}/{repo}")
                 source['branch'] = branch
+
+            if self.verbose:
+                print(f"Source repository: https://github.com/{user}/{repo}/tree/{branch}")
 
             self._source = source
         return self._source
@@ -142,11 +148,12 @@ class Librarian(object):
             content = json.loads(req.text)
         else:
             raise Exception(
-                f"Could not fetch contents for https://github.com/{self.source['user']}/{self.source['repo']}/tree/{self.source['branch']}")
+                f"Could not fetch contents for https://github.com/{self.source['user']}/{self.source['repo']}/tree/{self.source['branch']}"
+            )
 
         return content
 
-    def download_requirements(self):
+    def download_requirements(self, overwrite=False):
         """Download the requirements and / or environment files from source library"""
         setup = self.config['setup']
 
@@ -156,12 +163,15 @@ class Librarian(object):
                 req = requests.get(url)
 
                 if req.ok:
-                    with open(setup[key], 'w') as file:
-                        file.write(req.text)
+                    if overwrite is True or os.path.isfile(setup[key]) is False:
+                        if self.verbose:
+                            print(f"writing {setup[key]}")
+                        with open(setup[key], 'w') as file:
+                            file.write(req.text)
                 else:
                     raise Exception("Could not find url for {}".format(setup[key]))
 
-    def download_notebooks(self):
+    def download_notebooks(self, overwrite=False):
 
         for nb in self.notebook_list:
             # if the path doesn't exist, create it
@@ -179,8 +189,11 @@ class Librarian(object):
             filename = os.path.sep.join(nb.split('/'))
 
             if req.ok:
-                with open(filename, 'w') as file:
-                    file.write(req.text)
+                if overwrite is True or os.path.isfile(filename) is False:
+                    if self.verbose:
+                        print(f"writing {filename}")
+                    with open(filename, 'w') as file:
+                        file.write(req.text)
 
             else:
                 raise Exception(f"Could not find {url}")
