@@ -1,4 +1,7 @@
-import sys
+"""
+Tools for running nblibrarian from the command-line
+"""
+
 import argparse
 from .librarian import Librarian
 
@@ -9,7 +12,8 @@ def main():
     """
 
     parser = argparse.ArgumentParser(
-        description="Synchronizes a collection of notebooks from a 'warehouse' repository to a local repository based on the inputs in a library-config.yml file."
+        description="Synchronizes a collection of notebooks from a 'warehouse' "
+        "repository to a local repository based on the inputs in a library-config.yml file."
     )
     parser.add_argument(
         "-v",

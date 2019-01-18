@@ -1,3 +1,6 @@
+# pylint: disable=missing-docstring
+# Import functions/classes to make the public API
+
 from .librarian import Librarian
 
 __version__ = "0.0.1"

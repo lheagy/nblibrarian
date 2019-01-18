@@ -1,3 +1,8 @@
+"""
+Tools for parsing a .jupyter-include file and assessing if a source file
+meets those criteria or not
+"""
+
 import re
 
 
@@ -6,8 +11,8 @@ def parse_jupyter_include(file=".jupyter-include"):
     open a .jupyter-include file and parse the contents into a list
     """
     # open and read the contents of the .jupyter-include file
-    with open(file, "r") as file:
-        include_criteria = file.read()
+    with open(file, "r") as jupyter_include_file:
+        include_criteria = jupyter_include_file.read()
 
     # remove lines that are commented out or empty
     include_criteria = include_criteria.split("\n")
@@ -24,5 +29,4 @@ def include(source, include_criteria):
     """
     if any([re.search(c, source) for c in include_criteria]):
         return True
-    else:
-        return False
+    return False

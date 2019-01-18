@@ -1,7 +1,12 @@
-import yaml
-import json
-import requests
+"""
+Main classes and functions for the nblibrarian.
+"""
+
 import os
+import json
+import yaml
+import requests
+
 
 from .jupyter_include import parse_jupyter_include, include
 
@@ -20,7 +25,7 @@ EXPECTED_CONFIG = [
 EXPECTED_CONFIG_EXTENSION = ["yml", "yaml"]  #: extension of the config file
 
 
-class Librarian(object):
+class Librarian:
     """
     Class for configuring and managing the library of notebooks.
     """
@@ -44,7 +49,7 @@ class Librarian(object):
             ]
             config_file = [f for f in files if f.split(".")[-2] in EXPECTED_CONFIG]
 
-            if len(config_file) == 0 or len(config_file) > 1:
+            if config_file == "" or len(config_file) > 1:
                 raise Exception(
                     "Could not find library configuration file. Please specify "
                     "it by setting the 'config_file' property (e.g. "
@@ -139,7 +144,7 @@ class Librarian(object):
         """Source for the raw repository content on GitHub"""
         if getattr(self, "_content_url", None) is None:
             base = "https://raw.githubusercontent.com"
-            self._content_url = f"{base}/{self.source['user']}/{self.source['repo']}/{self.source['branch']}"
+            self._content_url = f"{base}/{self.source['user']}/{self.source['repo']}/{self.source['branch']}"  # pylint: disable=line-too-long
 
         return self._content_url
 
@@ -176,14 +181,14 @@ class Librarian(object):
         """
         Use the github API to fetch the contents of the source repository
         """
-        url = f"https://api.github.com/repos/{self.source['user']}/{self.source['repo']}/git/trees/{self.source['branch']}?recursive=1"
+        url = f"https://api.github.com/repos/{self.source['user']}/{self.source['repo']}/git/trees/{self.source['branch']}?recursive=1"  # pylint: disable=line-too-long
         req = requests.get(url)
 
         if req.ok:
             content = json.loads(req.text)
         else:
             raise Exception(
-                f"Could not fetch contents for https://github.com/{self.source['user']}/{self.source['repo']}/tree/{self.source['branch']}"
+                f"Could not fetch contents for https://github.com/{self.source['user']}/{self.source['repo']}/tree/{self.source['branch']}"  # pylint: disable=line-too-long
             )
 
         return content
@@ -210,19 +215,19 @@ class Librarian(object):
         """
         Download the desired notebooks
         """
-        for nb in self.notebook_list:
+        for notebook in self.notebook_list:
             # if the path doesn't exist, create it
-            directory = os.path.sep.join(nb.split("/")[:-1])
+            directory = os.path.sep.join(notebook.split("/")[:-1])
 
             if not os.path.isdir(directory):
                 os.makedirs(directory)
 
             # download the notebook
-            url = self.content_url + f"/{nb}"
+            url = self.content_url + f"/{notebook}"
             req = requests.get(url)
 
             # make a windows friendly filename
-            filename = os.path.sep.join(nb.split("/"))
+            filename = os.path.sep.join(notebook.split("/"))
 
             if req.ok:
                 if overwrite is True or os.path.isfile(filename) is False:

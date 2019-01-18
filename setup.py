@@ -28,11 +28,11 @@ with open("README.rst") as f:
 setup(
     name="nblibrarian",
     version="0.0.1",
-    packages=find_packages(exclude=["docs/*"]),
+    packages=find_packages(exclude=["docs/*", "tests/*"]),
     install_requires=["requests"],
     author="Lindsey Heagy",
     author_email="lindseyheagy@gmail.com",
-    description="nblibrarian: a utility for fetching notebooks from a source 'warehouse' repository",
+    description="nblibrarian: a utility for fetching notebooks from a source repository",
     long_description=LONG_DESCRIPTION,
     license="BSD",
     keywords="jupyter notebooks",
