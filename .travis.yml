@@ -22,12 +22,11 @@ script:
   - make lint
 
 after_success:
-
   - bash <(curl -s https://codecov.io/bash)
 
 deploy:
   - provider: script
-      script: ci/deploy-pypi.sh
-      on:
-          tags: true
-          branch: master
+    script: ci/deploy-pypi.sh
+    on:
+        tags: true
+        branch: master
