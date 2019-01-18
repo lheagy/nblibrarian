@@ -20,7 +20,7 @@ help:
 	@echo ""
 
 install:
-	pip install --no-deps -e .
+	pip install -e .
 
 test:
 	# Run a tmp folder to make sure the tests are run on the installed version
