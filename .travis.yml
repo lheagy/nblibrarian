@@ -20,9 +20,6 @@ install:
   - pip install -r requirements-dev.txt
   - make install
 
-before_script:
-  - curl -u {$GH_USERNAME}:{$GH_TOKEN} https://api.github.com/user
-
 script:
   - make test
   - make check
