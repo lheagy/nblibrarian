@@ -6,6 +6,7 @@ meets those criteria or not
 import fnmatch
 import re
 
+
 def parse_jupyter_include(file=".jupyter-include"):
     """
     open a .jupyter-include file and parse the contents into a list

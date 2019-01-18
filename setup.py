@@ -29,7 +29,7 @@ setup(
     name="nblibrarian",
     version="0.0.1",
     packages=find_packages(exclude=["docs/*", "tests/*"]),
-    install_requires=["requests"],
+    install_requires=["requests", "pyyaml"],
     author="Lindsey Heagy",
     author_email="lindseyheagy@gmail.com",
     description="nblibrarian: a utility for fetching notebooks from a source repository",
