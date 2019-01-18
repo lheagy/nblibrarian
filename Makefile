@@ -1,7 +1,7 @@
 # Build, package, test, and clean
 PROJECT=nblibrarian
 TESTDIR=tests
-PYTEST_ARGS=../tests -v
+PYTEST_ARGS= -v
 LINT_FILES=setup.py $(PROJECT)
 BLACK_FILES=setup.py $(PROJECT)
 FLAKE8_FILES=setup.py $(PROJECT)
