@@ -12,7 +12,6 @@ sudo: false
 env:
   global:
     - MASTER_BRANCH=master
-    - PYPI_PY=3.6  # deploy to pypi from python 3.6
     - TWINE_USERNAME=lheagy
     - secure: "pf4vT9kh7JbPE1K94F8Mvj++J4a3ckA6EcrC3DiTi2/NVdHyQwGljDm8a31Nm5Nii+ZduAhID7o5ZLJbNYPTMTzuBL4lWbsFfoaMxCN0ckFPAMF305d3ldyqT0WzO1GRIqw0ERYMm+h0gGqNnmTQ1bCtGU8VO9jEQ58o80cydlFOqgHt46Hk3k4H7G3p1XtJFQ4rG0ekryWqPSuZNWfGwDJvD5Na+1bJaAgDwaNyVRNyhbk3toOG7VoD85n1NttQ+eJYAspwEfSIKKSvrjqWd5uwBwupnOhkZFlniXw9jl8vClJG4UTZixIHPpMiqjjMZoUVrzjEoTzwZ/Zx/pAWDSCkAWfPem7snJ0Ob8qkIKozIiIQ2gNcx/QSoIf+aZnZ1cmcmS4KAnx4HxM5kI40JRuKRmL60ybhzhbG0o+0fkunSvqJoHp5Lzmax+QqQtmdjDOZNi5aepo+LgTomhKpRb0xdcVH1sh/eRwca2DLL/dOcodCHeQThnNXa42hjWT382Q0ZDNAKE26Q8m3N13lI9MM1ln3rNdyBLlYEap/wmsYXD2bXWuhjvGvFiFjIKiWF0oGD3U1zx+0UMqTiuAfdh4P0TsRIBsKLqcMIrEOOzppfXHD+3Kx94Cn4kYjTT+uAHokm4Du9X+GC4qYostxt3UhAAHLENT5fVfwMvgVHQY="
 

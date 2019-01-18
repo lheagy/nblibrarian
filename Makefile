@@ -1,6 +1,6 @@
 # Build, package, test, and clean
 PROJECT=nblibrarian
-TESTDIR=tmp-test-dir
+TESTDIR=tests
 PYTEST_ARGS=../tests -v
 LINT_FILES=setup.py $(PROJECT)
 BLACK_FILES=setup.py $(PROJECT)
@@ -24,10 +24,9 @@ install:
 
 test:
 	# Run a tmp folder to make sure the tests are run on the installed version
-	mkdir -p $(TESTDIR)
 	cd $(TESTDIR); pytest $(PYTEST_ARGS)
 	cp $(TESTDIR)/.coverage* .
-	rm -rvf $(TESTDIR)
+	cd ../
 
 format:
 	black $(BLACK_FILES)
