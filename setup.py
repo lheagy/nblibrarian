@@ -10,28 +10,26 @@ from distutils.core import setup
 from setuptools import find_packages
 
 CLASSIFIERS = [
-    'Development Status :: 4 - Beta',
-    'Intended Audience :: Developers',
-    'Intended Audience :: Science/Research',
-    'License :: OSI Approved :: BSD License',
-    'Programming Language :: Python',
-    'Operating System :: Microsoft :: Windows',
-    'Operating System :: POSIX',
-    'Operating System :: Unix',
-    'Operating System :: MacOS',
-    'Natural Language :: English',
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+    "Natural Language :: English",
 ]
 
 with open("README.rst") as f:
-    LONG_DESCRIPTION = ''.join(f.readlines())
+    LONG_DESCRIPTION = "".join(f.readlines())
 
 setup(
     name="nblibrarian",
     version="0.0.1",
     packages=find_packages(exclude=["docs/*"]),
-    install_requires=[
-        "requests",
-    ],
+    install_requires=["requests"],
     author="Lindsey Heagy",
     author_email="lindseyheagy@gmail.com",
     description="nblibrarian: a utility for fetching notebooks from a source 'warehouse' repository",
@@ -42,9 +40,5 @@ setup(
     download_url="http://github.com/lheagy/nblibrarian",
     classifiers=CLASSIFIERS,
     platforms=["Windows", "Linux", "Solaris", "Mac OS-X", "Unix"],
-    entry_points={
-        'console_scripts': [
-            'nblibrarian = nblibrarian.command_line:main',
-        ],
-    },
+    entry_points={"console_scripts": ["nblibrarian = nblibrarian.command_line:main"]},
 )
