@@ -33,7 +33,7 @@ def main():
     args = parser.parse_args()
 
     overwrite = False
-    if args.overwrite == "True":
+    if args.overwrite.lower() == "true":
         overwrite = True
 
     # set up the librarian

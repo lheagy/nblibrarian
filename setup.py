@@ -6,8 +6,7 @@ Tools for maintaining a library of Jupyter notebooks that are sourced
 from a "warehouse" of notebooks (a github repository)
 """
 
-from distutils.core import setup
-from setuptools import find_packages
+from setuptools import setup, find_packages
 
 CLASSIFIERS = [
     "Development Status :: 4 - Beta",
