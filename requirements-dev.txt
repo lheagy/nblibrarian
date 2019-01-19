@@ -2,6 +2,7 @@ flake8
 black
 twine
 pytest
+pytest-cov
 coverage
 codecov
 pylint

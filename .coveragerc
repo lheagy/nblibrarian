@@ -8,3 +8,5 @@ omit =
     */site-packages/nose/*
     */unittest2/*
     */setup.py
+    */tests/*
+    */docs/*

@@ -22,7 +22,7 @@ install:
 
 script:
   - cd $TEST_DIR
-  - pytest . --cov=discretize --cov-config ../.coveragerc -v -s
+  - pytest . --cov=nblibrarian --cov-config ../.coveragerc -v -s
   - make check
   - make lint
 
