@@ -32,7 +32,7 @@ def main():
     )
     args = parser.parse_args()
 
-    overwrite = True if args.overwrite == "True" else False
+    overwrite = True if args.overwrite == "True" else False                       #pylint: disable=line-simplifiable-if-expression
 
     # set up the librarian
     lib = Librarian(config_file=args.config, verbose=args.verbose)

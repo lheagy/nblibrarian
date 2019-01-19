@@ -25,7 +25,7 @@ install:
 test:
 	# Run a tmp folder to make sure the tests are run on the installed version
 	cd $(TESTDIR); pytest $(PYTEST_ARGS)
-	cp $(TESTDIR)/.coverage* .
+	cp .coverage* ../
 	cd ../
 
 format:
