@@ -24,8 +24,7 @@ install:
   - make install
 
 script:
-  - cd $TEST_DIR
-  - pytest . --cov=nblibrarian --cov-config ../.coveragerc -v -s
+  - cd $TEST_DIR; pytest . --cov=nblibrarian --cov-config ../.coveragerc -v -s; cd ../
   - make check
   - make lint
 
