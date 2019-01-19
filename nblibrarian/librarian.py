@@ -188,7 +188,7 @@ class Librarian:
             content = json.loads(req.text)
         else:
             raise Exception(
-                f"Could not fetch contents for https://github.com/{self.source['user']}/{self.source['repo']}/tree/{self.source['branch']}"  # pylint: disable=line-too-long
+                f"Could not fetch contents for https://github.com/{self.source['user']}/{self.source['repo']}/tree/{self.source['branch']} \n {req}"  # pylint: disable=line-too-long
             )
 
         return content
@@ -209,7 +209,7 @@ class Librarian:
                         with open(setup[key], "w") as file:
                             file.write(req.text)
                 else:
-                    raise Exception("Could not find url for {}".format(setup[key]))
+                    raise Exception(f"Could not find url for {setup[key]} \n {req}")
 
     def download_notebooks(self, overwrite=False):
         """
@@ -237,4 +237,4 @@ class Librarian:
                         file.write(req.text)
 
             else:
-                raise Exception(f"Could not find {url}")
+                raise Exception(f"Could not find {url} \n {req}")
