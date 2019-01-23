@@ -30,7 +30,8 @@ def include(source, include_criteria):
     """
 
     # fnmatch.translates enforces exact paths (i.e. nothing before and nothing after)
-    # we want to be more flexible so I remove those constraints (the first 3 characters and the last 3 characters)
+    # we want to be more flexible so I remove those constraints
+    # (the first 3 characters and the last 3 characters)
     if any([re.search(fnmatch.translate(c)[4:-3], source) for c in include_criteria]):
         return True
     return False
