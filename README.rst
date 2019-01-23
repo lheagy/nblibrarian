@@ -35,8 +35,8 @@ Configuring nblibrarian
 
 There are two files that you need in order to configure `nblibrarian`:
 
-- `.library-config.yml <.library-config.yml>`_
-- `.jupyter-include <.jupyter-include>`_
+- `.library-config.yml`
+- `.jupyter-include`
 
 .library-config.yml
 ^^^^^^^^^^^^^^^^^^^
