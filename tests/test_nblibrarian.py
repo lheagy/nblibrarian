@@ -6,6 +6,7 @@ import subprocess
 NOTEBOOKS = [
     "notebooks/dcip/DCIP_2D_Overburden_Pseudosections.ipynb",
     "notebooks/dcip/DC_Building_Pseudosections.ipynb",
+    "notebooks/dcip/DC_Cylinder_2D.ipynb",
     "notebooks/em/EM_Pipeline.ipynb",
     "notebooks/em/EM_ThreeLoopModel.ipynb",
     "notebooks/em/FDEM_Inductive_Sphere.ipynb",
@@ -19,13 +20,25 @@ NOTEBOOKS = [
     "notebooks/inversion/LinearInversion.ipynb",
 ]
 
-class TestValidSetup(unittest.TestCase):
+def tear_down():
+    for nb in NOTEBOOKS:
+        if os.path.exists(nb):
+            os.remove(nb)
+
+    for d in os.listdir('notebooks'):
+        os.rmdir(os.path.sep.join(['notebooks', d]))
+
+    os.rmdir('notebooks')
+    os.remove('environment.yml')
+    os.remove('requirements.txt')
+
+class TestNblibrarian(unittest.TestCase):
 
     def test_defaults(self):
         lib = nblibrarian.Librarian()
 
         # default library name should be found
-        assert lib.config_file == "library-config.yml"
+        assert lib.config_file == ".library-config.yml"
 
         # check that the values being read in are valid
         assert all([
@@ -40,32 +53,32 @@ class TestValidSetup(unittest.TestCase):
 
     @unittest.expectedFailure
     def test_invalid_config(self):
-        lib = nblibrarian.Librarian("corrupt-library-config.yml")
+        lib = nblibrarian.Librarian(".corrupt-library-config.yml")
         lib.source_url
 
     def test_command_line(self):
         assert(
             subprocess.call([
-                "nblibrarian", "--config=library-config.yml", "-v", "--overwrite=False"
+                "nblibrarian", "--config=.library-config.yml", "--jupyter-include=.jupyter-include", "-v", "--overwrite=False"
             ]) == 0
         )
 
         for nb in NOTEBOOKS:
             assert(os.path.isfile(nb))
 
-    @classmethod
-    def tearDownClass(cls):
-        # delete the files
+        tear_down()
+
+    def test_command_line_defaults(self):
+        assert(
+            subprocess.call([
+                "nblibrarian"
+            ]) == 0
+        )
+
         for nb in NOTEBOOKS:
-            if os.path.exists(nb):
-                os.remove(nb)
+            assert(os.path.isfile(nb))
 
-        for d in os.listdir('notebooks'):
-            os.rmdir(os.path.sep.join(['notebooks', d]))
-
-        os.rmdir('notebooks')
-        os.remove('environment.yml')
-        os.remove('requirements.txt')
+        tear_down()
 
 
 if __name__ == "__main__":

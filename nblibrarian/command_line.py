@@ -25,7 +25,13 @@ def main():
         "--config",
         nargs="?",
         default=None,
-        help="name of the configuration file (e.g. library-config.yml)",
+        help="name of the configuration file (e.g. .library-config.yml)",
+    )
+    parser.add_argument(
+        "--jupyter-include",
+        nargs="?",
+        default=None,
+        help="name of the jupyter include file (e.g. .jupyter-include)",
     )
     parser.add_argument(
         "--overwrite", nargs="?", default="False", help="overwrite exsisting conent?"

@@ -24,22 +24,34 @@ EXPECTED_CONFIG = [
 ]  #: expected name of config file
 EXPECTED_CONFIG_EXTENSION = ["yml", "yaml"]  #: extension of the config file
 
+EXPECTED_JUYPTER_INCLUDE = [
+    ".jupyter-include",
+    ".jupyter_include",
+    ".jupyter-include.txt",
+    ".jupyter_include.txt",
+    "jupyter-include.txt",
+    "jupyter_include.txt",
+]
+
 
 class Librarian:
     """
     Class for configuring and managing the library of notebooks.
     """
 
-    def __init__(self, config_file=None, verbose=False):
+    def __init__(self, config_file=None, jupyter_include_file=None, verbose=False):
         if config_file is not None:
             self.config_file = config_file  # go through the setter
+
+        if jupyter_include_file is not None:
+            self.jupyter_include_file = jupyter_include_file  # go through the setter
 
         self.verbose = verbose
 
     @property
     def config_file(self):
         """
-        name of the configuration file (e.g. library-config.yml)
+        Name of the configuration file (e.g. .library-config.yml)
         """
         if getattr(self, "_config_file", None) is None:
             files = [
@@ -47,9 +59,10 @@ class Librarian:
                 for f in os.listdir()
                 if any([f.endswith(ext) for ext in EXPECTED_CONFIG_EXTENSION])
             ]
+
             config_file = [f for f in files if f.split(".")[-2] in EXPECTED_CONFIG]
 
-            if config_file == "" or len(config_file) > 1:
+            if config_file == [] or len(config_file) > 1:
                 raise Exception(
                     "Could not find library configuration file. Please specify "
                     "it by setting the 'config_file' property (e.g. "
@@ -69,6 +82,29 @@ class Librarian:
             )
         else:
             self._config_file = value
+
+    @property
+    def jupyter_include_file(self):
+        """
+        Name of the jupyter include file (e.g. .jupyter-include)
+        """
+        if getattr(self, "_jupyter_include_file", None) is None:
+            jupyter_include_file = [
+                f for f in os.listdir() if f in EXPECTED_JUYPTER_INCLUDE
+            ]
+
+            if jupyter_include_file == [] or len(jupyter_include_file) > 1:
+                raise Exception(
+                    "Could not find the .jupyter-include file. Please specify "
+                    "it by setting the 'jupyter_include_file' property (e.g. "
+                    "librarian.jupyter_include_file = '.jupyter-include'"
+                )
+            self._jupyter_include_file = jupyter_include_file[0]
+        return self._jupyter_include_file
+
+    @jupyter_include_file.setter
+    def jupyter_include_file(self, value):
+        self._jupyter_include_file = value
 
     @property
     def config(self):
@@ -156,7 +192,7 @@ class Librarian:
         """
         if getattr(self, "_notebook_list", None) is None:
             content = self.fetch_repo_contents()
-            include_criteria = parse_jupyter_include()
+            include_criteria = parse_jupyter_include(self.jupyter_include_file)
 
             if "directory" in self.source.keys():
                 of_interest = [

@@ -1,6 +1,7 @@
 # dc resistivity
 notebooks/dcip/DCIP_2D_Overburden_Pseudosections.ipynb
 notebooks/dcip/DC_Building_Pseudosections
+DC_Cylinder_2D.ipynb
 
 # em
 /em/EM_Pipeline.ipynb
