@@ -33,7 +33,7 @@ setup(
     author_email="lindseyheagy@gmail.com",
     description="nblibrarian: a utility for fetching notebooks from a source repository",
     long_description=LONG_DESCRIPTION,
-    license="BSD",
+    license="3-clause BSD",
     keywords="jupyter notebooks",
     url="http://github.com/lheagy/nblibrarian",
     download_url="http://github.com/lheagy/nblibrarian",
