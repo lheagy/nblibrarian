@@ -1,3 +1,11 @@
+.. image:: https://img.shields.io/pypi/v/nblibrarian.svg
+    :target: https://pypi.python.org/pypi/nblibrarian
+    :alt: Latest PyPI version
+    
+ .. image:: https://travis-ci.org/lheagy/nblibrarian.svg?branch=master
+    :target: https://travis-ci.org/lheagy/nblibrarian
+    :alt: TravisCI status
+    
 nblibrarian
 ===========
 
