@@ -103,3 +103,13 @@ If you would like to specify the path to the jupyter include and config files (f
 .. code:: shell
 
   nblibrarian --config=.library-config.yml --jupyter-include=.jupyter-include
+
+Issues
+------
+
+If you run into any bugs, questions or problems using `nblibrarian`, please `create an issue <https://github.com/lheagy/nblibrarian/issues/new>`_ on github. 
+
+License
+-------
+
+This work is Licensed under the `BSD 3-Clause License <LICENSE>`_. 
