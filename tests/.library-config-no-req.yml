@@ -1,0 +1,9 @@
+# information about the source library
+source:
+  github:
+    user: geoscixyz
+    repo: geosci-labs
+    branch: master
+    directory: notebooks
+
+

@@ -8,7 +8,7 @@ NOTEBOOKS = [
     "notebooks/dcip/DC_Building_Pseudosections.ipynb",
     "notebooks/dcip/DC_Cylinder_2D.ipynb",
     "notebooks/em/EM_Pipeline.ipynb",
-    "notebooks/em/EM_ThreeLoopModel.ipynb",
+    "notebooks/em/EM_EM31.ipynb",
     "notebooks/em/FDEM_Inductive_Sphere.ipynb",
     "notebooks/em/FDEM_VMD_Sphere.ipynb",
     "notebooks/em/TDEM_HorizontalLoop_Sphere.ipynb",
@@ -79,6 +79,19 @@ class TestNblibrarian(unittest.TestCase):
             assert(os.path.isfile(nb))
 
         tear_down()
+
+    def test_requirements(self):
+        assert(
+            subprocess.call([
+                "nblibrarian"
+            ]) == 0
+        )
+
+        for nb in NOTEBOOKS:
+            assert(os.path.isfile(nb))
+
+        assert(os.path.isfile('requirements.txt'))
+        assert(not os.path.isfile('environment.yml'))
 
 
 if __name__ == "__main__":
