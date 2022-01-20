@@ -1,0 +1,13 @@
+# information about the source library
+source:
+  github:
+    user: geoscixyz
+    repo: geosci-labs
+    branch: master
+    directory: notebooks
+
+# setup options for the library
+setup:
+  requirements: requirements.txt  # include the requirements.txt file
+
+

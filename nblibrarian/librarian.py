@@ -7,6 +7,11 @@ import json
 import yaml
 import requests
 
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
+
 
 from .jupyter_include import parse_jupyter_include, include
 
@@ -129,7 +134,7 @@ class Librarian:
 
             # load the yaml file
             with open(self.config_file, "r") as doc:
-                config = yaml.load(doc)
+                config = yaml.load(doc, Loader)
 
             # check some of the config arguments
             check_config(config)
