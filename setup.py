@@ -26,7 +26,7 @@ with open("README.rst") as f:
 
 setup(
     name="nblibrarian",
-    version="0.0.1",
+    version="0.0.2",
     packages=find_packages(exclude=["docs/*", "tests/*"]),
     install_requires=["requests", "pyyaml"],
     author="Lindsey Heagy",
